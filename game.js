@@ -60,6 +60,34 @@ const bird = {
   }
 }
 
+/**GET READY MESSAGE */
+const getReady = {
+  sX: 0,
+  sY: 228,
+  w: 173,
+  h: 152,
+  x: (cvs.width / 2) - (173 / 2),
+  y: 80,
+
+  draw: function() {
+    ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+  }
+}
+
+/**GAME OVER MESSAGE */
+const gameOver = {
+  sX: 175,
+  sY: 228,
+  w: 225,
+  h: 202,
+  x: (cvs.width / 2) - (225 / 2),
+  y: 90,
+
+  draw: function() {
+    ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+  }
+}
+
 /**DRAW */
 function draw() {
   ctx.fillStyle = "#70C5CE"
@@ -68,6 +96,8 @@ function draw() {
   bg.draw()
   fg.draw()
   bird.draw()
+  getReady.draw()
+  gameOver.draw()
 }
 
 /**UPDATE */

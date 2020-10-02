@@ -39,6 +39,27 @@ const fg = {
   }
 }
 
+/**BIRD */
+const bird = {
+  animation : [
+    {sX: 276, sY: 112},
+    {sX: 276, sY: 139},
+    {sX: 276, sY: 164},
+    {sX: 276, sY: 139},
+  ],
+  w: 34,
+  h: 26,
+  x: 50,
+  y: 150,
+  frame: 0,
+
+  draw: function() {
+    let bird = this.animation[this.frame]
+
+    ctx.drawImage(sprite, bird.sX, bird.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+  }
+}
+
 /**DRAW */
 function draw() {
   ctx.fillStyle = "#70C5CE"
@@ -46,6 +67,7 @@ function draw() {
 
   bg.draw()
   fg.draw()
+  bird.draw()
 }
 
 /**UPDATE */

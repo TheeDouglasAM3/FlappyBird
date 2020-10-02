@@ -9,6 +9,34 @@ let frames = 0
 const sprite = new Image()
 sprite.src = 'img/sprite.png'
 
+/**GAME STATE */
+const state = {
+  current: 0,
+  getReady: 0,
+  game: 1,
+  over: 2,
+}
+
+/**CONTROL THE GAME */
+cvs.addEventListener('click', function(event){
+  switch (state.current) {
+    case state.getReady:
+      state.current = state.game
+      break
+
+    case state.game:
+      bird.flap()
+      break
+
+    case state.over:
+      state.current = state.getReady
+      break
+  
+    default:
+      break
+  }
+})
+
 /**BACKGROUND */
 const bg = {
   sX: 0,
@@ -57,7 +85,11 @@ const bird = {
     let bird = this.animation[this.frame]
 
     ctx.drawImage(sprite, bird.sX, bird.sY, this.w, this.h, this.x, this.y, this.w, this.h)
-  }
+  },
+
+  flap: function() {
+
+  },
 }
 
 /**GET READY MESSAGE */
@@ -70,7 +102,8 @@ const getReady = {
   y: 80,
 
   draw: function() {
-    ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+    if(state.current == state.getReady)
+      ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
   }
 }
 
@@ -84,7 +117,8 @@ const gameOver = {
   y: 90,
 
   draw: function() {
-    ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+    if(state.current == state.over)
+      ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
   }
 }
 

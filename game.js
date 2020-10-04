@@ -12,6 +12,22 @@ const DEGREE = Math.PI / 180
 const sprite = new Image()
 sprite.src = 'img/sprite.png'
 
+/**LOAD SOUNDS */
+const score_s_audio = new Audio()
+score_s_audio.src = "audio/sfx_point.wav"
+
+const flap_audio = new Audio()
+flap_audio.src = "audio/sfx_flap.wav"
+
+const hit_audio = new Audio()
+hit_audio.src = "audio/sfx_hit.wav"
+
+const swooshing_audio = new Audio()
+swooshing_audio.src = "audio/sfx_swooshing.wav"
+
+const die_audio = new Audio()
+die_audio.src = "audio/sfx_die.wav"
+
 /**GAME STATE */
 const state = {
   current: 0,
@@ -33,10 +49,12 @@ cvs.addEventListener('click', function(event){
   switch (state.current) {
     case state.getReady:
       state.current = state.game
+      swooshing_audio.play()
       break
 
     case state.game:
       bird.flap()
+      flap_audio.play()
       break
 
     case state.over:
@@ -158,9 +176,13 @@ const bird = {
       this.y += this.speed
 
       if(this.y + (this.h / 2) >= cvs.height - fg.h) {
+        
         this.y = cvs.height - fg.h - (this.h / 2)
-        if(state.current == state.game)
+        
+        if(state.current == state.game){
           state.current = state.over
+          die_audio.play()
+        }
       }
 
       //if the speed is greater than the jump means the bird is falling down
@@ -265,6 +287,7 @@ const pipes = {
         && bird.y - bird.radius < p.y + this.h) {
           
           state.current = state.over
+          hit_audio.play()
       }
       //bottom pipe
       if(bird.x + bird.radius > p.x
@@ -273,6 +296,7 @@ const pipes = {
         && bird.y - bird.radius < bottomPipeYPos + this.h) {
           
           state.current = state.over
+          hit_audio.play()
       }
 
       //move pipes to the left
@@ -283,6 +307,7 @@ const pipes = {
         this.position.shift()
         
         score.value += 1
+        score_s_audio.play()
         score.best = Math.max(score.value, score.best)
         localStorage.setItem('best', score.best)
       }

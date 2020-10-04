@@ -185,6 +185,12 @@ const bird = {
         }
       }
 
+      //if reach limit y of canvas
+      if(this.y < -10){
+        state.current = state.over
+        die_audio.play()
+      }
+
       //if the speed is greater than the jump means the bird is falling down
       if(this.speed >= this.jump) {
         this.rotation = 90 * DEGREE

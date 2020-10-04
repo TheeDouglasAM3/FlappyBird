@@ -356,6 +356,40 @@ const score = {
   }
 }
 
+
+/**MEDALS */
+const medal = {
+  rarety : [
+    {sX: 360, sY: 158}, //bronze
+    {sX: 360, sY: 112}, //silver
+    {sX: 312, sY: 158}, //gold
+    {sX: 312, sY: 112}, //platin
+  ],
+  w: 44,
+  h: 44,
+  x: 72,
+  y: 176,
+
+  draw: function() {
+    if(state.current == state.over){
+      if(score.value >= 10){
+        let medalDraw = {}
+
+        if(score.value >= 10 && score.value < 20) 
+          medalDraw = this.rarety[0]
+        else if(score.value >= 20 && score.value < 30) 
+          medalDraw = this.rarety[1]
+        else if(score.value >= 30 && score.value < 40) 
+          medalDraw = this.rarety[2]
+        else
+          medalDraw = this.rarety[3]
+
+        ctx.drawImage(sprite, medalDraw.sX, medalDraw.sY, this.w, this.h, this.x, this.y, this.w, this.h)
+      }
+    }
+  },
+}
+
 /**DRAW */
 function draw() {
   ctx.fillStyle = "#70C5CE"
@@ -368,6 +402,7 @@ function draw() {
   getReady.draw()
   gameOver.draw()
   score.draw()
+  medal.draw()
 }
 
 /**UPDATE */

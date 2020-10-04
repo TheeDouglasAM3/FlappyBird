@@ -1,5 +1,7 @@
 /**SELECT CANVAS */
+/** @type {CanvasRenderingContext2D} */
 const cvs = document.getElementById('bird')
+/** @type {CanvasRenderingContext2D} */
 const ctx = cvs.getContext('2d')
 
 /**GAME VARS AND CONSTS */
@@ -224,7 +226,7 @@ const pipes = {
 
     for (let i = 0; i < this.position.length; i++) {
       let p = this.position[i]
-      
+
       p.x -= this.dx
 
       // if the pipes go beyond canvas, we delete them from the array

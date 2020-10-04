@@ -20,6 +20,14 @@ const state = {
   over: 2,
 }
 
+/**START BUTTON */
+const startBtn = {
+  x : 120,
+  y : 263,
+  w : 83,
+  h : 29
+}
+
 /**CONTROL THE GAME */
 cvs.addEventListener('click', function(event){
   switch (state.current) {
@@ -32,7 +40,21 @@ cvs.addEventListener('click', function(event){
       break
 
     case state.over:
-      state.current = state.getReady
+      let rect = cvs.getBoundingClientRect()
+          let clickX = event.clientX - rect.left
+          let clickY = event.clientY - rect.top
+          
+          // CHECK IF WE CLICK ON THE START BUTTON
+          if(clickX >= startBtn.x
+              && clickX <= startBtn.x + startBtn.w 
+              && clickY >= startBtn.y 
+              && clickY <= startBtn.y + startBtn.h) {
+
+              pipes.reset()
+              bird.speedReset()
+              score.reset()
+              state.current = state.getReady
+          }
       break
   
     default:
@@ -129,7 +151,6 @@ const bird = {
     if(state.current == state.getReady) {
       //RESET BIRD POSITION AFTER GAME OVER
       this.y = 150
-      this.speed = 0
       this.rotation = 0 * DEGREE
 
     }else{
@@ -150,6 +171,10 @@ const bird = {
         this.rotation = -25 * DEGREE
       }
     }
+  },
+
+  speedReset: function() {
+    this.speed = 0
   },
 }
 
@@ -218,7 +243,6 @@ const pipes = {
   },
 
   update: function() {
-    if(state.current === state.getReady) this.position = []
     if(state.current !== state.game) return 
     
     if(frames % 100 == 0) {
@@ -263,6 +287,10 @@ const pipes = {
         localStorage.setItem('best', score.best)
       }
     }
+  },
+
+  reset: function() {
+    this.position = []
   }
 }
 
@@ -291,6 +319,10 @@ const score = {
         ctx.strokeText(this.best, 225, 228)
     }
   },
+
+  reset: function() {
+    this.value = 0
+  }
 }
 
 /**DRAW */

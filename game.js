@@ -89,6 +89,9 @@ const bird = {
   h: 26,
   x: 50,
   y: 150,
+
+  radius: 12,
+
   frame: 0,
 
   gravity: 0.25,
@@ -215,8 +218,9 @@ const pipes = {
   },
 
   update: function() {
+    if(state.current === state.getReady) this.position = []
     if(state.current !== state.game) return 
-
+    
     if(frames % 100 == 0) {
       this.position.push({
         x: cvs.width,
@@ -227,6 +231,27 @@ const pipes = {
     for (let i = 0; i < this.position.length; i++) {
       let p = this.position[i]
 
+      let bottomPipeYPos = p.y + this.h + this.gap
+
+      //COLLISION DETECTION
+      //top pipe
+      if(bird.x + bird.radius > p.x
+        && bird.x - bird.radius < p.x + this.w
+        && bird.y + bird.radius > p.y
+        && bird.y - bird.radius < p.y + this.h) {
+          
+          state.current = state.over
+      }
+      //bottom pipe
+      if(bird.x + bird.radius > p.x
+        && bird.x - bird.radius < p.x + this.w
+        && bird.y + bird.radius > bottomPipeYPos
+        && bird.y - bird.radius < bottomPipeYPos + this.h) {
+          
+          state.current = state.over
+      }
+
+      //move pipes to the left
       p.x -= this.dx
 
       // if the pipes go beyond canvas, we delete them from the array

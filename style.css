@@ -1,3 +1,19 @@
+#page-game {
+  background:#1f001f;
+  font-family: 'Press Start 2P', cursive;
+  color: #e0d42b;
+  text-align: center;
+}
+
+#page-game img {
+  margin: 0.4rem;
+  width: 12.8rem;
+}
+
+#page-game p {
+  font-size: 0.5rem;
+}
+
 canvas {
   border: 0.1rem solid #121212;
   display: block;

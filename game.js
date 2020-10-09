@@ -252,7 +252,7 @@ const pipes = {
 
   w: 53,
   h: 400,
-  gap: 85,
+  gap: 105,
   maxYPos: -150,
   dx: 2,
 
@@ -357,6 +357,42 @@ const score = {
   }
 }
 
+/**DIFICULDADE */
+const dificult = {
+
+  text: 'Dificuldade: ❑❑❑❑',
+
+  draw: function(){
+    ctx.fillStyle = "#121212";
+    
+    if(state.current == state.game){
+      ctx.lineWidth = 2;
+      ctx.font = "bold 15px Teko";
+      ctx.fillText(this.text, 10, 20)
+    }
+  },
+
+  update: function(){
+    //Dificuldades
+    if(score.value < 5){ 
+      pipes.gap = 105
+      this.text = 'Dificuldade: ❑❑❑❑'
+    }else if(score.value >= 5 && score.value < 10){ 
+      pipes.gap = 100
+      this.text = 'Dificuldade: ◼❑❑❑'
+    }else if(score.value >= 10 && score.value < 20){
+      pipes.gap = 95
+      this.text = 'Dificuldade: ◼◼❑❑'
+    }else if(score.value >= 20 && score.value < 30){
+      pipes.gap = 90
+      this.text = 'Dificuldade: ◼◼◼❑'
+    }else{
+      pipes.gap = 85
+      this.text = 'Dificuldade: ◼◼◼◼'
+    }
+  }
+}
+
 
 /**MEDALS */
 const medal = {
@@ -403,6 +439,7 @@ function draw() {
   getReady.draw()
   gameOver.draw()
   score.draw()
+  dificult.draw()
   medal.draw()
 }
 
@@ -411,6 +448,7 @@ function update() {
   bird.update()
   fg.update()
   pipes.update()
+  dificult.update()
 }
 
 /**LOOP */

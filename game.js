@@ -100,9 +100,9 @@ const fg = {
   sX: 276,
   sY: 0,
   w: 224,
-  h: 112,
+  h: 110,
   x: 0,
-  y: cvs.height - 112,
+  y: cvs.height - 110,
 
   dx: 2,
 
@@ -365,7 +365,7 @@ const dificult = {
   draw: function(){
     ctx.fillStyle = "#121212";
     
-    if(state.current == state.game){
+    if(state.current !== state.getReady){
       ctx.lineWidth = 2;
       ctx.font = "bold 15px Teko";
       ctx.fillText(this.text, 10, 20)

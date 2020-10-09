@@ -10,7 +10,7 @@ const DEGREE = Math.PI / 180
 
 /**LOAD SPRITE IMAGE */
 const sprite = new Image()
-sprite.src = 'img/sprite.png'
+sprite.src = 'img/moiayayayay.png'
 
 /**LOAD SOUNDS */
 const score_s_audio = new Audio()
@@ -109,11 +109,12 @@ const fg = {
   draw: function() {
     ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h)
     ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, (this.x + this.w), this.y, this.w, this.h)
+    ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, (this.x + (this.w * 2)), this.y, this.w, this.h)
   },
 
   update: function() {
     if(state.current == state.game) 
-      this.x = (this.x - this.dx) % (this.w / 2)
+      this.x = (this.x - this.dx) % (this.w)
   }
 }
 

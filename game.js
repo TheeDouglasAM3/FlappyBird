@@ -255,6 +255,7 @@ const pipes = {
   gap: 105,
   maxYPos: -150,
   dx: 2,
+  dy: 0,
 
   draw: function() {
     for(let i  = 0; i < this.position.length; i++){
@@ -308,6 +309,7 @@ const pipes = {
 
       //move pipes to the left
       p.x -= this.dx
+      p.y += this.dy
 
       // if the pipes go beyond canvas, we delete them from the array
       if(p.x + this.w <= 0){
@@ -375,20 +377,39 @@ const dificult = {
   update: function(){
     //Dificuldades
     if(score.value < 5){ 
+      sprite.src = 'img/moiayayayay.png'
       pipes.gap = 105
-      this.text = 'Dificuldade: ❑❑❑❑'
-    }else if(score.value >= 5 && score.value < 10){ 
+      pipes.dx = 2
+      fg.dx = 2
+      pipes.dy = 0
+      this.text = 'Dificuldade: ❑❑❑❑❑❑❑'
+    }else if(score.value >= 5 && score.value < 10){
+      sprite.src = 'img/demonio.png'
       pipes.gap = 100
-      this.text = 'Dificuldade: ◼❑❑❑'
+      this.text = 'Dificuldade: ◼❑❑❑❑❑❑'
     }else if(score.value >= 10 && score.value < 20){
       pipes.gap = 95
-      this.text = 'Dificuldade: ◼◼❑❑'
+      this.text = 'Dificuldade: ◼◼❑❑❑❑❑'
     }else if(score.value >= 20 && score.value < 30){
       pipes.gap = 90
-      this.text = 'Dificuldade: ◼◼◼❑'
-    }else{
-      pipes.gap = 85
-      this.text = 'Dificuldade: ◼◼◼◼'
+      this.text = 'Dificuldade: ◼◼◼❑❑❑❑'
+    }else if(score.value >= 30 && score.value < 45){
+      pipes.gap = 88
+      this.text = 'Dificuldade: ◼◼◼◼❑❑❑'
+    }else if(score.value >= 45 && score.value < 60){
+      pipes.dx = 1.75
+      fg.dx = 1.75
+      this.text = 'Dificuldade: ◼◼◼◼◼❑❑'
+    }else if(score.value >= 60 && score.value < 80){
+      pipes.dx = 1.55
+      fg.dx = 1.55
+      this.text = 'Dificuldade: ◼◼◼◼◼◼❑'
+    }else if(score.value >= 80 && score.value < 100){
+      pipes.dy = -0.2
+      this.text = 'Dificuldade: ◼◼◼◼◼◼◼'
+    }else if(score.value >= 100){
+      pipes.dy = -0.4
+      this.text = 'Dificuldade: Demoníaca ☠'
     }
   }
 }

@@ -384,7 +384,6 @@ const dificult = {
       pipes.dy = 0
       this.text = 'Dificuldade: ❑❑❑❑❑❑❑'
     }else if(score.value >= 5 && score.value < 10){
-      sprite.src = 'img/demonio.png'
       pipes.gap = 100
       this.text = 'Dificuldade: ◼❑❑❑❑❑❑'
     }else if(score.value >= 10 && score.value < 20){
@@ -408,6 +407,7 @@ const dificult = {
       pipes.dy = -0.2
       this.text = 'Dificuldade: ◼◼◼◼◼◼◼'
     }else if(score.value >= 100){
+      sprite.src = 'img/demonio.png'
       pipes.dy = -0.4
       this.text = 'Dificuldade: Demoníaca ☠'
     }

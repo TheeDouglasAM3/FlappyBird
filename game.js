@@ -45,7 +45,7 @@ const startBtn = {
 }
 
 /**CONTROL THE GAME */
-cvs.addEventListener('click', function(event){
+function controlStateGame(event){
   switch (state.current) {
     case state.getReady:
       state.current = state.game
@@ -63,10 +63,12 @@ cvs.addEventListener('click', function(event){
           let clickY = event.clientY - rect.top
           
           // CHECK IF WE CLICK ON THE START BUTTON
-          if(clickX >= startBtn.x
+          if((clickX >= startBtn.x
               && clickX <= startBtn.x + startBtn.w 
               && clickY >= startBtn.y 
-              && clickY <= startBtn.y + startBtn.h) {
+              && clickY <= startBtn.y + startBtn.h
+              && event.type == "click")
+              || event.type == "keyup") {
 
               pipes.reset()
               bird.speedReset()
@@ -78,7 +80,9 @@ cvs.addEventListener('click', function(event){
     default:
       break
   }
-})
+}
+cvs.addEventListener('click', (event) => controlStateGame(event), false)
+document.addEventListener('keyup', (event) => controlStateGame(event), false)
 
 /**BACKGROUND */
 const bg = {

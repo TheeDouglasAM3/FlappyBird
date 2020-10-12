@@ -4,6 +4,6 @@ function playTheme(){
 }
 
 let canvas = document.querySelector('canvas')
-
-canvas.addEventListener('click', (event) => playTheme(event))
-document.addEventListener('keyup', (event) => playTheme(event))
+canvas.addEventListener('click', () => {
+  playTheme()
+})

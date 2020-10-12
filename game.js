@@ -45,7 +45,7 @@ const startBtn = {
 }
 
 /**CONTROL THE GAME */
-function controlStateGame(event){
+cvs.addEventListener('click', function(event){
   switch (state.current) {
     case state.getReady:
       state.current = state.game
@@ -63,12 +63,10 @@ function controlStateGame(event){
           let clickY = event.clientY - rect.top
           
           // CHECK IF WE CLICK ON THE START BUTTON
-          if((clickX >= startBtn.x
+          if(clickX >= startBtn.x
               && clickX <= startBtn.x + startBtn.w 
               && clickY >= startBtn.y 
-              && clickY <= startBtn.y + startBtn.h
-              && event.type == "click")
-              || event.type == "keyup") {
+              && clickY <= startBtn.y + startBtn.h) {
 
               pipes.reset()
               bird.speedReset()
@@ -80,9 +78,33 @@ function controlStateGame(event){
     default:
       break
   }
+})
+
+document.body.onkeyup = function(e){
+  if(e.keyCode == 32){
+    switch (state.current) {
+      case state.getReady:
+        state.current = state.game
+        swooshing_audio.play()
+        break
+  
+      case state.game:
+        bird.flap()
+        flap_audio.play()
+        break
+
+      case state.over: 
+        pipes.reset()
+        bird.speedReset()
+        score.reset()
+        state.current = state.getReady
+        break
+      
+      default:
+        break
+    }
+  }
 }
-cvs.addEventListener('click', (event) => controlStateGame(event), false)
-document.addEventListener('keyup', (event) => controlStateGame(event), false)
 
 /**BACKGROUND */
 const bg = {
